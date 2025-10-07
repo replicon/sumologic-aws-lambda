@@ -3,7 +3,14 @@ const { LambdaClient, InvokeCommand } = require("@aws-sdk/client-lambda");
 
 class Messages {
   constructor(env) {
-    this.sqs = new SQSClient({ region: env.AWS_REGION });
+    const sqsConfig = { region: env.AWS_REGION };
+
+    // Disable MD5 checksum if environment variable is set
+    if (env.DISABLE_MD5 === 'true') {
+      sqsConfig.md5 = false;
+    }
+
+    this.sqs = new SQSClient(sqsConfig);
     this.env = env;
   }
 
