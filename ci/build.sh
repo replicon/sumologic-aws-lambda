@@ -30,13 +30,13 @@ function uploadToS3() {
 
     if [ "$REPLICON_GIT_BRANCH" = "main" ]; then
         # Main branch - upload to release artifacts
-        S3_PATH="s3://replicon-release-artifact/sumologic-aws-lambda/"
+        S3_PATH="s3://replicon-release-artifacts/sumologic-aws-lambda/"
         echo "==> Uploading to release artifacts (main branch)"
     else
         # Feature branch - upload to build artifacts
         # S3_PATH="s3://replicon-build-artifacts/sumologic-aws-lambda/"
         # echo "==> Uploading to build artifacts (branch: $REPLICON_GIT_BRANCH)"
-        S3_PATH="s3://replicon-release-artifact/sumologic-aws-lambda/"
+        S3_PATH="s3://replicon-release-artifacts/sumologic-aws-lambda/"
         echo "==> Uploading to release artifacts (main branch)"
     fi
 
