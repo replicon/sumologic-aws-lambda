@@ -11,7 +11,7 @@ function buildCloudWatchLogs() {
     npm install
     npm run build
 
-    Rename zip file based on branch
+    # Rename zip file based on branch
     if [ "$REPLICON_GIT_BRANCH" = "main" ]; then
         ZIP_NAME="sumologic-aws-lambda-m-${VERSION}.zip"
     else
