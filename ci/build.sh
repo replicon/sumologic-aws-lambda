@@ -11,12 +11,13 @@ function buildCloudWatchLogs() {
     npm install
     npm run build
 
-    # Rename zip file based on branch
+    Rename zip file based on branch
     if [ "$REPLICON_GIT_BRANCH" = "main" ]; then
         ZIP_NAME="sumologic-aws-lambda-m-${VERSION}.zip"
     else
         ZIP_NAME="sumologic-aws-lambda-b-${REPLICON_GIT_CLEAN_BRANCH}-${VERSION}.zip"
     fi
+    
 
     mv cloudwatchlogs-with-dlq.zip $ZIP_NAME
     echo "==> Renamed to $ZIP_NAME"
@@ -33,8 +34,10 @@ function uploadToS3() {
         echo "==> Uploading to release artifacts (main branch)"
     else
         # Feature branch - upload to build artifacts
-        S3_PATH="s3://replicon-build-artifacts/sumologic-aws-lambda/"
-        echo "==> Uploading to build artifacts (branch: $REPLICON_GIT_BRANCH)"
+        # S3_PATH="s3://replicon-build-artifacts/sumologic-aws-lambda/"
+        # echo "==> Uploading to build artifacts (branch: $REPLICON_GIT_BRANCH)"
+        S3_PATH="s3://replicon-release-artifact/sumologic-aws-lambda/"
+        echo "==> Uploading to release artifacts (main branch)"
     fi
 
     pushd cloudwatchlogs-with-dlq
